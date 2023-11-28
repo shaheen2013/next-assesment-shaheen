@@ -2,6 +2,7 @@
 
 import EmptyCart from '@/app/components/cart/EmptyCart';
 import { useCart } from '@/app/context/CartContext';
+import { APP_URL } from '@/app/utils/constant';
 import { useState } from 'react';
 import { CiLock } from "react-icons/ci";
 
@@ -12,7 +13,7 @@ const Checkout = () => {
     const handleCheckout = async () => {
         setLoading(true)
 
-        await fetch("http://localhost:3000/api/checkout", {
+        await fetch(APP_URL + "/api/checkout", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

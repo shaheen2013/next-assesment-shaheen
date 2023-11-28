@@ -1,5 +1,7 @@
+import { APP_URL, STRIPE_SECRET_KEY } from "@/app/utils/constant";
 import { NextResponse } from "next/server";
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
+const stripe = require("stripe")(STRIPE_SECRET_KEY);
 
 const getActiveProducts = async () => {
     const checkProducts = await stripe.products.list();
@@ -59,8 +61,8 @@ export const POST = async (request) => {
     const session = await stripe.checkout.sessions.create({
         line_items: stripeItems,
         mode: "payment",
-        success_url: "http://localhost:3000/success",
-        cancel_url: "http://localhost:3000/cancel",
+        success_url: APP_URL +  "/success",
+        cancel_url: APP_URL +  "/cancel",
     });
 
     return NextResponse.json({ url: session.url });
